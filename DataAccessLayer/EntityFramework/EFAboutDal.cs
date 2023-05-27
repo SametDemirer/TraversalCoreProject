@@ -13,11 +13,9 @@ namespace DataAccessLayer.EntityFramework
 
     public class EFAboutDal : GenericRepository<About>, IAboutDal
     {
-        private readonly Context _context;
-
         public EFAboutDal(Context context) : base(context)
         {
-            _context = context;
+           
         }
     }
 }

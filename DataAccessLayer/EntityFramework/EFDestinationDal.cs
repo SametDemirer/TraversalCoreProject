@@ -12,11 +12,10 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFDestinationDal : GenericRepository<Destination>, IDestinationDal
     {
-        private readonly Context _context;
 
         public EFDestinationDal(Context context) : base(context)
         {
-            _context = context;
+           
         }
     }
 }
