@@ -22,6 +22,8 @@ namespace TraversalCore.Extensions
             services.AddScoped<ITestimonialService, TestimonialManager>();
             services.AddScoped<ICommentDal, EFCommentDal>();
             services.AddScoped<ICommentService, CommentManager>();
+            services.AddScoped<IReservationDal, EFReservationDal>();
+            services.AddScoped<IReservationService, ReservationManager>();
         }
     }
 }

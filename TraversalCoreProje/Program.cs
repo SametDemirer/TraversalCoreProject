@@ -7,6 +7,7 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using TraversalCore.Extensions;
+using TraversalCore.Models;
 
 namespace TraversalCoreProje
 {
@@ -22,7 +23,9 @@ namespace TraversalCoreProje
             builder.Services.AddDbContext<Context>();
 
             builder.Services.AddIdentity<AppUser, AppRole>()
-                .AddEntityFrameworkStores<Context>();
+                .AddEntityFrameworkStores<Context>()
+                .AddErrorDescriber<CustomIdentityValidater>();
+
             builder.Services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -31,7 +34,9 @@ namespace TraversalCoreProje
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
             builder.Services.AddMvc();
+
             builder.Services.ConfigureServices();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -52,6 +57,13 @@ namespace TraversalCoreProje
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Default}/{action=Index}/{id?}");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
 
             app.Run();
         }

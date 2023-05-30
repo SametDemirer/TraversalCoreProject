@@ -1,0 +1,66 @@
+﻿@model Reservation
+@{
+    ViewData["Title"] = "NewReservation";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h1>Yeni Rezervasyon Sayfası</h1>
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Rezervasyon</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="close" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Rezervasyonunuz başlangıçta onay bekliyor şeklinde alınacaktır.Rezervasyon onaylanma süreci için "Güncel Rezervasyonlarım" menusunu takip etmeyi unutmayın.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" name="close" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<form method="post">
+    <div class="form-group">
+        @Html.Label("Lokasyon")
+        @Html.DropDownListFor(x=>x.Destination,(List<SelectListItem>)ViewBag.Values ,new{@class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.Label("Kişi Sayısı")
+        <input type="text" class="form-control" asp-for="PersonCount" />
+    </div>
+    <div class="form-group">
+        @Html.Label("Tarih")
+        <input type="date" class="form-control" asp-for="ReservationDate" />
+    </div>
+    <div class="form-group">
+        @Html.Label("Eklemek İstedikleriniz")
+        <textarea class="form-control" asp-for="Description">
+
+        </textarea>
+    </div>
+    <button class="btn btn-success">
+        Rezervasyon Yap
+    </button>
+</form>
+@*<script>
+    window.onload=(function () {
+        alert('Rezervasyonunuz başlangıçta onay bekliyor şeklinde alınacaktır.Rezervasyon onaylanma süreci için "Güncel Rezervasyonlarım" menusunu takip etmeyi unutmayın.');
+    });</script>*@
+<script>
+    // Sayfa yüklendiğinde modalı göster
+    window.onload = function () {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+    };
+
+    // Kapatma düğmesine tıklandığında modalı gizle
+    var closeBtn = document.getElementsByName("close")[0];
+    closeBtn.onclick = function () {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    };
+</script>
