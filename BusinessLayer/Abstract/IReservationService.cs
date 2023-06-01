@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IReservationService:IGenericService<Reservation>
+    public interface IReservationService : IGenericService<Reservation>
     {
-
+        List<Reservation> GetListWithReservationsByWaitApproval(int id);
+        List<Reservation> GetListWithReservationsByApproved(int id);
+        List<Reservation> GetListOldReservations(int id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -11,11 +12,13 @@ namespace TraversalCore.Areas.Member.Controllers
     {
         private readonly IDestinationService _destinationService;
         private readonly IReservationService _reservationService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ReservationController(IDestinationService destinationService, IReservationService reservationService)
+        public ReservationController(IDestinationService destinationService, IReservationService reservationService, UserManager<AppUser> userManager)
         {
             _destinationService = destinationService;
             _reservationService = reservationService;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -43,14 +46,26 @@ namespace TraversalCore.Areas.Member.Controllers
         }
 
         [HttpGet]
-        public IActionResult MyActiveReservations()
+        public async Task<IActionResult> MyApprovalReservations()
         {
-            return View();
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            var valuesList = _reservationService.GetListWithReservationsByWaitApproval(values.Id);
+            return View(valuesList);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyActiveReservations()
+        {
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            var valuesList = _reservationService.GetListWithReservationsByApproved(values.Id);
+            return View(valuesList);
         }
         [HttpGet]
-        public IActionResult MyOldReservation()
+        public async Task<IActionResult> MyOldReservations()
         {
-            return View();
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            var valuesList = _reservationService.GetListOldReservations(values.Id);
+            return View(valuesList);
         }
     }
 }
