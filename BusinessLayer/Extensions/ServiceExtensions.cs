@@ -2,13 +2,14 @@
 using BusinessLayer.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFramework;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TraversalCore.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void ConfigureServices(this IServiceCollection services)
+        public static void ContainerDependencies(this IServiceCollection services)
         {
             services.AddScoped<IDestinationService, DestinationManager>();
             services.AddScoped<IDestinationDal, EFDestinationDal>();
@@ -33,6 +34,19 @@ namespace TraversalCore.Extensions
 
             services.AddScoped<IGuideDal, EFGuideDal>();
             services.AddScoped<IGuideService, GuideManager>();
+
+            services.AddScoped<IAppUserDal, EFAppUserDal>();
+            services.AddScoped<IAppUserService, AppUserManager>();
+
+            services.AddScoped<IExcelService, ExcelManager>();
+            services.AddScoped<IPdfService, PdfManager>();
+
+            services.AddScoped<IContactUsDal, EFContactUsDal>();
+            services.AddScoped<IContactUsService, ContactUsManager>();
+
+            services.AddScoped<IAnnouncementDal, EFAnnouncementDal>();
+            services.AddScoped<IAnnouncementService, AnnouncementManager>();
+
         }
     }
 }

@@ -8,5 +8,25 @@ namespace TraversalCore.Controllers
         {
             return PartialView();
         }
+        public PartialViewResult PartialAppBrandDemo()
+        {
+            return PartialView();
+        }
+        public PartialViewResult PartialSidebar()
+        {
+            return PartialView();
+        }
+        public PartialViewResult PartialNavBar()
+        {
+            return PartialView();
+        }
+        public PartialViewResult PartialFooter()
+        {
+            return PartialView();
+        }
+        public PartialViewResult PartialScript()
+        {
+            return PartialView();
+        }
     }
 }

@@ -20,17 +20,27 @@ namespace BusinessLayer.Concrete
 
         public void TAdd(Guide t)
         {
-            throw new NotImplementedException();
+            _guideDal.Insert(t);
+        }
+
+        public void TChangeToFalseByGuideId(int id)
+        {
+            _guideDal.ChangeToFalseByGuideId(id);
+        }
+
+        public void TChangeToTrueByGuideId(int id)
+        {
+            _guideDal.ChangeToTrueByGuideId(id);
         }
 
         public void TDelete(Guide t)
         {
-            throw new NotImplementedException();
+            _guideDal.Delete(t);
         }
 
         public Guide TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _guideDal.GetById(id);
         }
 
         public List<Guide> TGetList()
@@ -40,7 +50,7 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Guide t)
         {
-            throw new NotImplementedException();
+            _guideDal.Update(t);
         }
     }
 }

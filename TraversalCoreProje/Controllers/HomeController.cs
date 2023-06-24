@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System.Diagnostics;
 using TraversalCoreProje.Models;
 
@@ -15,6 +16,7 @@ namespace TraversalCoreProje.Controllers
 
         public IActionResult Index()
         {
+            Log.Information("Index sayfası çağrıldı");
             return View();
         }
 

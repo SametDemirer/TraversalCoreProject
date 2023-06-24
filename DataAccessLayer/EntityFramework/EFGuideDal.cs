@@ -18,5 +18,20 @@ namespace DataAccessLayer.EntityFramework
         {
             _context = context;
         }
+
+        public void ChangeToFalseByGuideId(int id)
+        {
+            Guide guide = _context.Guides.Find(id);
+
+            guide.Status = false;
+            _context.SaveChanges();
+        }
+
+        public void ChangeToTrueByGuideId(int id)
+        {
+            Guide guide = _context.Guides.Find(id);
+            guide.Status = true;
+            _context.SaveChanges();
+        }
     }
 }
